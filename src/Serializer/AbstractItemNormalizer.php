@@ -371,7 +371,8 @@ abstract class AbstractItemNormalizer extends AbstractObjectNormalizer
             }
         }
 
-        return $allowedAttributes;
+        // Attributes need to be allowed by Symfony's serializer at the same time (eg. serialization group)
+        return array_intersect($allowedAttributes, parent::getAllowedAttributes($classOrObject, $context, $attributesAsString));
     }
 
     /**
